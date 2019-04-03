@@ -120,7 +120,8 @@ ul {
 
 /* Sizing awesome Font icons in Channel list */
 
-#channels .fas, .far {
+/* #channels .fas, .far { */
+i {
     font-size: 24px;
 }
 
@@ -168,8 +169,8 @@ li.selected {
 }
 /* Sizing awesome Font icons in Channel list */
 
-#tab-bar .fas, .far {
-    font-size: 24px;
+#tab-bar i {
+
     padding: 4px;
 }
 
