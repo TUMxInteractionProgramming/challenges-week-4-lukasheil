@@ -88,3 +88,36 @@ function toggleEmojis() {
     /* $('#emojis').show(); // #show */
     $('#emojis').toggle(); // #toggle
 }
+
+// #8 Constructor Function for new chat messages
+function Message(text){
+    createdBy = currentLocation.what3words;
+    latitude = currentLocation.latitude;
+    longitude = currentLocation.longitude;
+    createdOn = Date.now();
+    //expiresOn = createdOn.setMinutes( createdOn.getMinutes() + 15 );
+    this.text = text;
+    own = true;
+}
+
+// #8 sendMessage function
+function sendMessage(){
+    var messy = new Message('Hello Chatter');
+    console.log('This is the send Message ' + messy.text);
+    createMessageElement()
+}
+
+// #8 create message Element function
+function createMessageElement(messageObject){
+
+    $('<span>').html(messageObject.createdBy);
+    $('<span>').html(messageObject.createdOn);
+    // $('<span>').html(messageObject.expiresIn);
+
+//     <div class="message">
+//     <h3><a href=":createdBy:" target="_blank"><strong>:createdBy:</strong></a>
+//         :createdOn: <em>:expiresIn: min. left</em></h3>
+//     <p>:text:</p>
+//     <button>+5 min.</button>
+// </div>
+}

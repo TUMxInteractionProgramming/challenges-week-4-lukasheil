@@ -290,3 +290,8 @@ li.selected {
 .message.own {
     margin-left: 17.5%;
 }
+
+#send-button{
+    position: absolute;
+    right: 0px;
+}
