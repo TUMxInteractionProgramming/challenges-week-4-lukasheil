@@ -95,7 +95,14 @@ h1 #channel-star {
     /* #6 #liking #filled  */
     position:absolute;
     right: 16px;
+    font-size: 24px;
+    padding: 0px;
 }
+
+/* Test for correct class toggle*/
+/* h1 .far{
+    background-color: yellow;
+} */
 
 /* CHANNELS LIST */
 
@@ -109,6 +116,12 @@ ul {
     top: 64px; /* the app bar's height */
     bottom: 72px; /* the tab bar's height */
     overflow-y: auto; /* this adds scroll bars on demand */
+}
+
+/* Sizing awesome Font icons in Channel list */
+
+#channels .fas, .far {
+    font-size: 24px;
 }
 
 li {
@@ -152,6 +165,12 @@ li.selected {
 
     /* #5 #tab-bar #flexify the buttons*/
     display: flex;
+}
+/* Sizing awesome Font icons in Channel list */
+
+#tab-bar .fas, .far {
+    font-size: 24px;
+    padding: 4px;
 }
 
 /* #5 #smileys #lazy: we can reuse most of the tab-bar buttons' styles for the chat-bar buttons */
