@@ -134,7 +134,7 @@ function createMessageElement(messageObject){
 
     // Temp parts of date to combine to string in datetostring
      var dTemp = new Date (messageObject.createdOn);   
-     var weekdayTemp = dTemp.getDay();
+     var weekdayTemp = dTemp.getDay()-1;
      var dateTemp = dTemp.getDate();
      var monthTemp = dTemp.getMonth();
      var hourTemp = dTemp.getHours();
