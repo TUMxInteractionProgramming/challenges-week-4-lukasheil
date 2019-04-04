@@ -4,7 +4,7 @@ var yummy = {
     createdOn: new Date(2016, 3, 1),
     createdBy: 'minus.plus.yummy',
     starred: false,
-    expiresIn: 100,
+    expiresIn: 100 * 60 * 1000,
     messageCount: 999,
 }
 
@@ -13,7 +13,7 @@ var sevencontinents = {
     createdOn: new Date(2016, 3, 1),
     createdBy: 'minus.plus.yummy',
     starred: true,
-    expiresIn: 100,
+    expiresIn: 100 * 60 * 1000,
     messageCount: 999,
 }
 
@@ -22,7 +22,7 @@ var killerapp = {
     createdOn: new Date(2016, 3, 1),
     createdBy: 'minus.plus.yummy',
     starred: false,
-    expiresIn: 100,
+    expiresIn: 100 * 60 * 1000,
     messageCount: 999,
 }
 
@@ -31,7 +31,7 @@ var firstpersononmars = {
     createdOn: new Date(2016, 3, 1),
     createdBy: 'minus.plus.yummy',
     starred: true,
-    expiresIn: 100,
+    expiresIn: 100 * 60 * 1000,
     messageCount: 999,
 }
 
@@ -40,6 +40,6 @@ var octoberfest = {
     createdOn: new Date(2016, 3, 1),
     createdBy: 'minus.plus.yummy',
     starred: false,
-    expiresIn: 100,
+    expiresIn: 100 * 60 * 1000,
     messageCount: 999,
 }

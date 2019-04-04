@@ -118,6 +118,22 @@ ul {
     overflow-y: auto; /* this adds scroll bars on demand */
 }
 
+/* #8 styling of expires in and msg count */
+li .channel-meta span{
+ 
+    vertical-align: middle;
+    
+
+    background-color:#3F51B5;
+    color:white;
+    margin:2px;
+    padding:2px;
+    border-radius: 2px;
+    font-size:smaller;
+    align-self:center;
+}
+
+
 /* Sizing awesome Font icons in Channel list */
 
 /* #channels .fas, .far { */

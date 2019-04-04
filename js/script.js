@@ -115,14 +115,6 @@ function sendMessage(){
     $('#messages').append(createMessageElement(sentMessage));
 
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));
-
-    // Logging of Sent Message
-    console.log('This created by ' + sentMessage.createdBy);
-    console.log('created on ' + sentMessage.createdOn);
-    // console.log('date now  ' + Date.now());
-    // Currently not working
-    console.log('expires on ' + sentMessage.expiresOn);
-    console.log('This is the sent Message ' + sentMessage.text);
 }
 
 // #8 create message Element function
@@ -137,12 +129,7 @@ function createMessageElement(messageObject){
      "Thu", "Fri", "Sat", "Sun"
    ];
     
-    
-    
-    // Old try
-    // var expiresIn = Math.round(Date.now() - messageObject.expiresOn);
-
-    // new epxires in variable
+    // new expires in variable
     var expiresIn = Math.round((messageObject.expiresOn - messageObject.createdOn) / (60*1000) )
 
     // Temp parts of date to combine to string in datetostring
@@ -152,9 +139,6 @@ function createMessageElement(messageObject){
      var monthTemp = dTemp.getMonth();
      var hourTemp = dTemp.getHours();
      var minutesTemp = dTemp.getMinutes();
-
-     
-     console.log('Weekday'+weekdayTemp);
 
     //  Combining parts of date top string by looking up values in const array at begging of function
     
@@ -169,21 +153,37 @@ function createMessageElement(messageObject){
         +':'+
         minutesTemp;
 
-     console.log('date'+dateTemp);
-     console.log("Date to string"+dateToString);
-
-    // console.log('expires on ' + messageObject.expiresOn);
-    // console.log('expires in ' + expiresIn);
-
-    // creating new html elements
-
-    // var messageHtmlDiv =
-    
-    // '<div class="message'+(messageObject.own ? ' own' : '') + '">'
-    //     +'<h3><a href="http://w3w.co/'+messageObject.createdBy+'" target="_blank"><strong>'+messageObject.createdBy+'</strong></a> '+dateToString+' <em>'+expiresIn+' min. left</em></h3> <p>'+messageObject.text+'</p><button>+5 min.</button>' + '</div>';
-
-    // return messageHtmlDiv;
-   
-    // Old try
-    return $('<div>').addClass('message').append('<h3><a href="http://w3w.co/'+messageObject.createdBy+'" target="_blank"><strong>'+messageObject.createdBy+'</strong></a> '+dateToString+' <em>'+expiresIn+' min. left</em></h3> <p>'+messageObject.text+'</p><button>+5 min.</button>');
+    // retruning element that creates div with jQuery and appends all other channel meta
+    return $('<div>').addClass('message own').append('<h3><a href="http://w3w.co/'+messageObject.createdBy+'" target="_blank"><strong>'+messageObject.createdBy+'</strong></a> '+dateToString+' <em>'+expiresIn+' min. left</em></h3> <p>'+messageObject.text+'</p><button>+5 min.</button>');
 }
+
+// #8 function to list new channels
+function listChannels(){
+$('#channels ul').append(createChannelElement(yummy));
+$('#channels ul').append(createChannelElement(sevencontinents));
+$('#channels ul').append(createChannelElement(killerapp));
+$('#channels ul').append(createChannelElement(firstpersononmars));
+$('#channels ul').append(createChannelElement(octoberfest));
+
+// console.log('function list Channels executed');
+}
+
+// function to create Channel elements
+function createChannelElement(channelObject){
+    
+    // temporary variables
+    var channelElement = $("<li>").text(channelObject.name);
+    var channelMeta = $("<span class='channel-meta'>").appendTo(channelElement);
+
+       // creating star on new list entry
+       $('<i>').addClass('fa-star').addClass(channelObject.starred ? 'fas':'far').appendTo(channelMeta);
+       // creating expires in time new list entry
+       $("<span>").text((channelObject.expiresIn / 60000)+' min').appendTo(channelMeta);
+       // creating msg count to new list entry
+       $("<span>").text(channelObject.messageCount+' new').appendTo(channelMeta);
+       // creating chevron right on new list entry
+       $('<i>').addClass('fa fa-chevron-right').appendTo(channelMeta);
+
+      return channelElement;
+}
+

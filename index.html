@@ -20,7 +20,8 @@
     <script src="js/script.js"></script>
     <script src="js/channels.js"></script>
 </head>
-<body>
+<body onload="listChannels()">
+
 
 <!-- channel area -->
 <div id="channels">
@@ -167,14 +168,6 @@
             <button>+5 min.</button>
         </div>
 
-        <!-- #8 Message -->
-        <!-- <div class="message">
-            <h3><a href=":createdBy:" target="_blank"><strong>:createdBy:</strong></a>
-                :createdOn: <em>:expiresIn: min. left</em></h3>
-            <p>:text:</p>
-            <button>+5 min.</button>
-        </div> -->
-
     </div>
 
     <!-- #5 #smileys #insert the chat-bar -->
@@ -185,13 +178,11 @@
         <!-- #8 input Element -->
         <input type="text" id="messageInput" name="messageinput" maxlength="140" placeholder="Message...">
 
-         <!-- #8 send-message button with onclick sendMessage function -->
+         <!-- #8 send-message button right arrow with onclick sendMessage function -->
         <button id="send-button" onclick="sendMessage()">
             <i class="fas fa-arrow-right"></i>    
         </button>
-    </div>
-
-    <!-- #8 button with arrow -->
+    </div>   
     
 </div>
 
