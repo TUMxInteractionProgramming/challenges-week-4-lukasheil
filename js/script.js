@@ -13,7 +13,7 @@ var currentChannel = {}
 var currentLocation = {
     longitude: 48.1390971,
     latitude: 11.6095345,
-    what3words: 'dichterin.übungen.ausfällt'
+    what3words: 'uniforms.swanky.logo'
 }
 
 function switchChannel(channelName) {
@@ -28,13 +28,13 @@ function switchChannel(channelName) {
 
     /* #7 star depending on object property */
     if (channelName.starred == true){
-        // $('#channel-star').removeClass('far fa-star');
-        // $('#channel-star').addClass('fas fa-star');
+         $('#channel-star').removeClass('far fa-star');
+         $('#channel-star').addClass('fas fa-star');
 
     } else{
-        // $('#channel-star').removeClass('fas fa-star');
-        // $('#channel-star').addClass('far fa-star');
-        $('#channel-star').toggleClass('fas fa-star far fa-star');
+        $('#channel-star').removeClass('fas fa-star');
+        $('#channel-star').addClass('far fa-star');
+        // $('#channel-star').toggleClass('fas fa-star far fa-star');
     }
 
     /* #6 #highlight the selected #channel.
@@ -44,8 +44,8 @@ function switchChannel(channelName) {
 
     // #7 Setting channelName to currentChannel variable
     currentChannel = channelName;
-    
-    // Test console logs 
+
+    // Test console logs
     // console.log("Current Channel", currentChannel);
     // console.log("Current location", currentLocation);
 }
@@ -53,15 +53,17 @@ function switchChannel(channelName) {
 /* #7 #liking a channel on #click */
 function star() {
     $('#channel-star').toggleClass('fas fa-star far fa-star');
-    
+
     // #7 writing new Status of Star in the refering object
     currentChannel.starred = !currentChannel.starred
+
+    $('#channels li:contains(' + currentChannel.name + ') .fa-star').toggleClass("fas far");
 }
 
 // #7 function starList() {
 //     // jQuery to display correct star in channel list
 //     $('.fas').toggleClass('fas fa-star far fa-star');
-    
+
 //     // writing Status of Star in the refering object
 //     currentChannel.starred = !currentChannel.starred
 // }
@@ -91,33 +93,97 @@ function toggleEmojis() {
 
 // #8 Constructor Function for new chat messages
 function Message(text){
-    createdBy = currentLocation.what3words;
-    latitude = currentLocation.latitude;
-    longitude = currentLocation.longitude;
-    createdOn = Date.now();
-    //expiresOn = createdOn.setMinutes( createdOn.getMinutes() + 15 );
+    this.createdBy = currentLocation.what3words;
+    this.latitude = currentLocation.latitude;
+    this.longitude = currentLocation.longitude;
+    this.createdOn = Date.now();
+    this.expiresOn = this.createdOn + (1000 /*sec*/ * 60 /*min*/ * 15 /*hour*/ * 1 /*day*/ * 1);
     this.text = text;
-    own = true;
+    this.own = true;
 }
 
 // #8 sendMessage function
 function sendMessage(){
-    var messy = new Message('Hello Chatter');
-    console.log('This is the send Message ' + messy.text);
-    createMessageElement()
+    // creating new Message Element
+    var sentMessage = new Message($('#messageInput').val());
+    console.log(sentMessage);
+
+    // Clearing input field
+    $('#messageInput').val('');
+
+    // Calling createMessageElement Function and appending it to Messages
+    $('#messages').append(createMessageElement(sentMessage));
+
+    $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+
+    // Logging of Sent Message
+    console.log('This created by ' + sentMessage.createdBy);
+    console.log('created on ' + sentMessage.createdOn);
+    // console.log('date now  ' + Date.now());
+    // Currently not working
+    console.log('expires on ' + sentMessage.expiresOn);
+    console.log('This is the sent Message ' + sentMessage.text);
 }
 
 // #8 create message Element function
 function createMessageElement(messageObject){
 
-    $('<span>').html(messageObject.createdBy);
-    $('<span>').html(messageObject.createdOn);
-    // $('<span>').html(messageObject.expiresIn);
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+    ];
+  
+    const dayNames = [
+     "Mon", "Tue", "Wed",
+     "Thu", "Fri", "Sat", "Sun"
+   ];
+    
+    
+    
+    // Old try
+    // var expiresIn = Math.round(Date.now() - messageObject.expiresOn);
 
-//     <div class="message">
-//     <h3><a href=":createdBy:" target="_blank"><strong>:createdBy:</strong></a>
-//         :createdOn: <em>:expiresIn: min. left</em></h3>
-//     <p>:text:</p>
-//     <button>+5 min.</button>
-// </div>
+    // new epxires in variable
+    var expiresIn = Math.round((messageObject.expiresOn - messageObject.createdOn) / (60*1000) )
+
+    // Temp parts of date to combine to string in datetostring
+     var dTemp = new Date (messageObject.createdOn);   
+     var weekdayTemp = dTemp.getDay();
+     var dateTemp = dTemp.getDate();
+     var monthTemp = dTemp.getMonth();
+     var hourTemp = dTemp.getHours();
+     var minutesTemp = dTemp.getMinutes();
+
+     
+     console.log('Weekday'+weekdayTemp);
+
+    //  Combining parts of date top string by looking up values in const array at begging of function
+    
+    var dateToString = 
+        dayNames[weekdayTemp]
+        + ', '+
+        monthNames[monthTemp]
+        +' '+
+        dateTemp
+        +'th, '+
+        hourTemp
+        +':'+
+        minutesTemp;
+
+     console.log('date'+dateTemp);
+     console.log("Date to string"+dateToString);
+
+    // console.log('expires on ' + messageObject.expiresOn);
+    // console.log('expires in ' + expiresIn);
+
+    // creating new html elements
+
+    // var messageHtmlDiv =
+    
+    // '<div class="message'+(messageObject.own ? ' own' : '') + '">'
+    //     +'<h3><a href="http://w3w.co/'+messageObject.createdBy+'" target="_blank"><strong>'+messageObject.createdBy+'</strong></a> '+dateToString+' <em>'+expiresIn+' min. left</em></h3> <p>'+messageObject.text+'</p><button>+5 min.</button>' + '</div>';
+
+    // return messageHtmlDiv;
+   
+    // Old try
+    return $('<div>').addClass('message').append('<h3><a href="http://w3w.co/'+messageObject.createdBy+'" target="_blank"><strong>'+messageObject.createdBy+'</strong></a> '+dateToString+' <em>'+expiresIn+' min. left</em></h3> <p>'+messageObject.text+'</p><button>+5 min.</button>');
 }

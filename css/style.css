@@ -231,6 +231,8 @@ li.selected {
     display: none;
 }
 
+
+
 /* MESSAGES */
 
 .message {
@@ -291,7 +293,17 @@ li.selected {
     margin-left: 17.5%;
 }
 
+#messageInput{
+    font-size: medium;
+    width: 100%;
+    border-style: none;
+
+    position: relative;    
+}
+
 #send-button{
-    position: absolute;
+    width: 10%;
+    position: relative;
     right: 0px;
 }
+
